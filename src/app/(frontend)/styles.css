@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f5f5f5;
+  --color-fg: #2b2b2b;
+  --color-primary: #5d8a9f;
+  --color-accent: var(--color-primary);
+  --color-accent-dark: #3e6f82;
+  --color-accent-light: #8fb3c1;
+  
+  --font-display: var(--font-bebas), sans-serif;
+  --font-mono: var(--font-dm-mono), monospace;
+  
+  --radius-none: 0;
+  
+  --shadow-brutal: 4px 4px 0px var(--color-accent);
+  
+  @keyframes marquee {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-50%); }
+  }
+  --animate-marquee: marquee 25s linear infinite;
+}
+
+:root {
+  --bg: #f5f5f5;
+  --fg: #2b2b2b;
+  --accent: #5d8a9f;
+  --accent-dark: #3e6f82;
+  --accent-light: #8fb3c1;
+  --border: 2px solid var(--fg);
+  --shadow: 4px 4px 0px var(--accent);
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-fg font-mono overflow-x-hidden;
+    cursor: crosshair;
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+    /* Simplified noise for better scroll performance */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4, .font-display {
+    @apply font-display uppercase tracking-tight;
+  }
+
+  button, .btn {
+    @apply relative px-8 py-4 bg-transparent border-2 border-fg text-fg font-display text-xl uppercase tracking-wider transition-all duration-75 active:translate-y-1 active:shadow-none shadow-brutal hover:bg-fg hover:text-bg;
+  }
+
+  input, textarea {
+    @apply bg-transparent border-2 border-fg p-4 text-fg outline-none focus:border-accent;
+  }
+}
+
+@layer components {
+  .card-brutal {
+    @apply border-2 border-fg p-8 transition-all duration-300 hover:bg-accent hover:text-bg;
+  }
+
+  .marquee-strip {
+    @apply border-y-2 border-fg py-4 overflow-hidden whitespace-nowrap bg-bg;
+    will-change: transform;
+  }
+
+}
