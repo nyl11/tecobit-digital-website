@@ -23,6 +23,11 @@ export const FormSubmissions: CollectionConfig = {
       name: 'email',
       type: 'email',
       required: true,
+      admin: {
+        components: {
+          Field: '/admin/CopyableEmail#CopyableEmail',
+        },
+      },
     },
     {
       name: 'service',
