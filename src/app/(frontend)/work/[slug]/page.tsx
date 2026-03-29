@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import type { Media } from '@/payload-types'
 
-export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const payload = await getPayloadInstance()
 
   const { docs } = await payload.find({
@@ -35,7 +35,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
         <h1 className="text-[10vw] md:text-[8vw] font-display uppercase leading-[0.9] tracking-tighter mb-12">
           {study.title}
         </h1>
-        
+
         {study.stats && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-y-2 border-fg py-12">
             {study.stats.map((stat, i) => (
@@ -51,13 +51,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
       <div className="container mx-auto px-4">
         <div className="relative aspect-[21/9] border-2 border-fg shadow-brutal mb-24 grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden">
           {img?.url && (
-            <Image
-              src={img.url}
-              alt={study.title}
-              fill
-              className="object-cover"
-              priority
-            />
+            <Image src={img.url} alt={study.title} fill className="object-cover" priority />
           )}
         </div>
 
@@ -65,7 +59,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
           <p className="text-3xl font-mono leading-relaxed mb-16 italic opacity-90 border-l-8 border-accent pl-8">
             {study.excerpt}
           </p>
-          
+
           <div className="prose-brutal font-mono text-lg leading-loose opacity-80">
             {/* Rich text would be rendered here */}
             {/* study.content && <RichText content={study.content} /> */}

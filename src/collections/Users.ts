@@ -7,7 +7,7 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   access: {
-    admin: authenticated,
+    admin: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
     read: adminOrSelf,
     create: adminOnly,
     update: adminOrSelf,
@@ -37,8 +37,8 @@ export const Users: CollectionConfig = {
       required: true,
       saveToJWT: true,
       access: {
-        create: adminOnly,
-        update: adminOnly,
+        create: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
+        update: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
       },
     },
   ],
