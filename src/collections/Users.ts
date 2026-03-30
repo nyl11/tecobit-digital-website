@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { adminOnly, adminOrSelf, authenticated } from '../access'
+import { adminOnly, adminOnlyField, adminOrSelf, authenticated } from '../access'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -37,8 +37,8 @@ export const Users: CollectionConfig = {
       required: true,
       saveToJWT: true,
       access: {
-        create: adminOnly,
-        update: adminOnly,
+        create: adminOnlyField,
+        update: adminOnlyField,
       },
     },
   ],

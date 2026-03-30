@@ -4,8 +4,12 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import type { Media } from '@/payload-types'
 
-export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default async function CaseStudyPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
   const payload = await getPayloadInstance()
 
   const { docs } = await payload.find({

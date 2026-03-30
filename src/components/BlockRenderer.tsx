@@ -17,7 +17,12 @@ const blockComponents = {
   'form-block': Form,
 }
 
-export const BlockRenderer: React.FC<{ blocks: any[] }> = ({ blocks }) => {
+interface Block {
+  blockType: string
+  [key: string]: unknown
+}
+
+export const BlockRenderer: React.FC<{ blocks: Block[] }> = ({ blocks }) => {
   if (!blocks) return null
 
   return (
@@ -29,12 +34,12 @@ export const BlockRenderer: React.FC<{ blocks: any[] }> = ({ blocks }) => {
         const isHero = block.blockType === 'hero'
         
         if (isHero) {
-          return <BlockComponent key={index} {...block} />
+          return <BlockComponent key={index} {...(block as any)} />
         }
 
         return (
           <div key={index} className="relative z-10 bg-bg">
-            <BlockComponent {...block} />
+            <BlockComponent {...(block as any)} />
           </div>
         )
       })}

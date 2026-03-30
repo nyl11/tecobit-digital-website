@@ -1,10 +1,14 @@
-import type { Access } from 'payload'
+import type { Access, AccessArgs, FieldAccess } from 'payload'
 
-export const anyone: Access = () => true
+export const anyone = (): boolean => true
 
-export const authenticated: Access = ({ req: { user } }) => Boolean(user)
+export const authenticated = ({ req: { user } }: AccessArgs): boolean => Boolean(user)
 
-export const adminOnly: Access = ({ req: { user } }) => Boolean(user?.roles?.includes('admin'))
+export const adminOnly = ({ req: { user } }: AccessArgs): boolean =>
+  Boolean(user?.roles?.includes('admin'))
+
+export const adminOnlyField: FieldAccess = ({ req: { user } }) =>
+  Boolean(user?.roles?.includes('admin'))
 
 export const adminOrSelf: Access = ({ req: { user } }) => {
   if (!user) return false

@@ -1,3 +1,5 @@
+import { setServers } from "node:dns/promises";
+setServers(["1.1.1.1", "8.8.8.8"]);
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'

@@ -16,7 +16,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
               <div key={i} className="card-brutal flex flex-col justify-between">
                 <div>
                   <div className="text-4xl font-display mb-12 relative">
-                    <span className="text-accent absolute -left-6 -top-4 opacity-50">"</span>
+                    <span className="text-accent absolute -left-6 -top-4 opacity-50">&quot;</span>
                     {t.quote}
                   </div>
                 </div>

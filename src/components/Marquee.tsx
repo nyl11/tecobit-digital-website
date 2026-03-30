@@ -10,7 +10,7 @@ interface MarqueeProps {
 
 export const Marquee: React.FC<MarqueeProps> = ({
   text,
-  speed = 20,
+  speed: _speed = 20,
   reverse = false,
   className,
   textClassName,

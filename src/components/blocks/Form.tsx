@@ -2,7 +2,13 @@
 
 import React, { useState } from 'react'
 
-export const Form: React.FC<any> = ({ heading, subheading, buttonText }) => {
+interface FormProps {
+  heading?: string
+  subheading?: string
+  buttonText?: string
+}
+
+export const Form: React.FC<FormProps> = ({ heading, subheading, buttonText }) => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,7 +39,7 @@ export const Form: React.FC<any> = ({ heading, subheading, buttonText }) => {
       } else {
         setStatus('error')
       }
-    } catch (err) {
+    } catch (_err) {
       setStatus('error')
     }
   }
