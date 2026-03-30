@@ -12,7 +12,7 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { slug } = await params
   const payload = await getPayloadInstance()
-  
+
   const { docs } = await payload.find({
     collection: 'pages',
     where: {

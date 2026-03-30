@@ -7,7 +7,7 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   access: {
-    admin: authenticated,
+    admin: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
     read: adminOrSelf,
     create: adminOnly,
     update: adminOrSelf,
